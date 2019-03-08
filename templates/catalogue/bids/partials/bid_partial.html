@@ -1,0 +1,54 @@
+{% load bids_tags %}
+{% load basket_tags %}
+{% load display_tags %}
+{% load i18n %}
+{% load purchase_info_tags %}
+
+    <!-- <a id="write_review" href="{% url 'catalogue:bids-add' product_slug=product.slug product_pk=product.id %}#addbid" class="btn btn-success btn-sm">
+		{% trans "Fazer lance" %}
+	</a> -->
+{% if not user.is_authenticated%}
+	<p>Usuário anonimo não pode fazer lances</p>
+
+
+{%else%}
+	<form action="{% url 'catalogue:bids-add' product_slug=product.slug product_pk=product.id %}" method="post">
+    	{% csrf_token %}
+	
+		{% get_stock_and_bids product.id user as result %}
+
+		{% if not result.accept and result.total_bids < 3 %}
+	    	<div class="form-group">
+				<input type="submit" class="btn btn-success btn-sm" value="Eu pago">
+	    		<input type="text" name="bid" class="form-control" style="width:25% !important; float: left; margin-right: 10px">
+	    	</div>
+	    {% endif %}
+
+		<!-- {% if messages %}
+		<ul class="messages">
+		  {% for message in messages %}
+		  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		  {% endfor %}
+		</ul>
+		{% endif %} -->
+
+    	<div>
+    		{% autoescape off %} {{ result.html }} {% endautoescape %}
+    	</div>
+
+
+	    
+    </form>
+
+    {% if result.accept %}
+		{% block product_basket_form %}
+            {% include "catalogue/partials/add_to_basket_form.html" %}
+        {% endblock %}
+    <!--
+    	<br><br>
+    	<a id="buy" href="#" class="btn btn-success btn-sm">Comprar</a> -->
+	{% endif %}
+		
+{% endif %}
+
+</p>

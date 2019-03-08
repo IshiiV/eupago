@@ -1,0 +1,38 @@
+[OK] Botao "Fazer lance" => "Eu pago"
+
+[OK] messages.success => "Muito obrigado! Seu lance de R$X foi aceito... conseguimos negociar com o nosso parceiro um valor mais em conta e agora você vai adquirir o produto por R$X"
+[OK] messages.warning => "Seu lance de R$X foi abaixo do esperado pelo vendedor, tente outra vez! você ainda tem X chances."
+
+
+[OK] Testar se lances de um usuário em um produto influenciam em lances de outro produto.
+
+[OK] Criar meio de pagamento "fake" => depois de pago, gerar código de redeem
+
+
+
+[OK] Ver como adicionar produtos na pagina inicial
+
+[OK] Olhar a pagina inicial.... tentar olhar um melhor layout
+
+[OK] O valor do produto que vai pra cesta deve ser do Lance + 10% e não o valor original.
+
+[OK] Gerar código de redeem
+
+
+
+[Alterar no dashboard]
+- Um vendedor vai ter um cadastro no dashboard, mas qualquer produto adicionado terá que ser aceito pelo superusuário (nossa equipe)
+- Os vendedores verão os códigos de redeem gerados pela compra dos clientes.
+- Um cliente vai apresentar o código de redeem pessoalmente e o vendedor vai marcar como "usado" no painel.
+
+
+
+Caso de Uso:
+o segundo lance do vendedor é R$80 (R$88 incluindo 10%) de um produto de 100 reais (R$110 incluindo 10%).
+O cliente dá um segundo lance de R$100, logo 
+	diferença = $12
+	desconto = diferença/2 = $6
+
+	logo, o cliente paga $94.
+
+	Isso tá certo?

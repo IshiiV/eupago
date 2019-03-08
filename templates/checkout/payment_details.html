@@ -1,0 +1,53 @@
+{% extends "checkout/checkout.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Payment details" %} | {{ block.super }}
+{% endblock %}
+
+{% block checkout_nav %}
+    {% include 'checkout/nav.html' with step=3 %}
+{% endblock %}
+
+{% block checkout_title %}{% trans "Enter payment details" %}{% endblock %}
+
+{% block order_contents %}{% endblock %}
+{% block shipping_address %}{% endblock %}
+{% block shipping_method %}{% endblock %}
+{% block payment_method %}{% endblock %}
+
+{% block payment_details %}
+    {% block payment_details_content %}
+    <div class="col-sm-12">
+        <div class="sub-header">
+            <h2>{% trans "Credit card" %}</h2>
+        </div>
+        {% block new_payment_form %}
+            <div class="well">
+
+                <form action="{% url 'checkout:payment-details' %}" method="post">
+                    {% csrf_token %}
+                
+    
+                    <div class="form-group">
+                        <label>Número do cartão</label>
+                        <input type="number" name="numero" class="form-control" maxlength="19">
+                        <label>Titular do cartão</label>
+                        <input type="text" name="nome" class="form-control" maxlength="50">
+                        <label>Data de validade do cartão</label>
+                        <input type="month" name="vencimento" class="form-control")>
+
+                        <!-- <input type="submit" class="btn btn-success btn-sm" value="Eu pago"> -->
+                    </div>
+                    
+           
+                </form>
+
+
+        
+            </div>
+        {% endblock %}
+    </div>
+    <a id="view_preview" href="{% url 'checkout:preview' %}" class="btn btn-primary btn-lg">{% trans "Continue" %}</a>
+    {% endblock payment_details_content %}
+{% endblock payment_details %}
